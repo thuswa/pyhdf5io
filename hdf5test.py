@@ -1,12 +1,11 @@
 #!/usr/bin/env python
 # $Id$
-# Last modified Sun Aug 17 16:05:10 2008 on violator
-# update count: 4
+# Last modified Sun Aug 17 17:05:49 2008 on violator
+# update count: 5
 
 from hdf5io import *
 
-
-
+# test function
 def hdf5test():
     # Create some test variables
     var = 1

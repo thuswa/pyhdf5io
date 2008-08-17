@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # $Id$
-# Last modified Sun Aug 17 15:13:19 2008 on violator
-# update count: 265
+# Last modified Sun Aug 17 17:25:53 2008 on violator
+# update count: 266
 
 """
 A set of I/O functions for the hdf5 file format.
@@ -65,7 +65,7 @@ def hdf5save(filename, varstring=None, groupname="/"):
     else:
         if varstring is None:
            varnames = __extractvars(dictvar)
-           print varnames
+#           print varnames   # for debugging
         else:
            raise ValueError, "varstring must be a string!"
       

@@ -1,20 +1,17 @@
 #!/usr/bin/env python
 # $Id$
-# Last modified Sun Aug 17 15:20:50 2008 on violator
-# update count: 7
+# Last modified Sun Aug 17 17:05:21 2008 on violator
+# update count: 12
 
 from distutils.core import setup
 
-setup(name='hdf5io',
+setup(name='pyhdf5io',
       version='0.1',
-      description='Modules for ',
+      description='Python module containing hdf5 load and save function.',
       author='Albert Thuswaldner',
       author_email='thuswa@gmail.com',
-      url='',
+      url='http://code.google.com/p/pyhdf5io/',
       packages=['hdf5io'],
-      package_dir={'potato.shock': 'potato/shock'},
-      package_data={'potato.shock': ['README','INSTALL'] },
-      requires=['scipy(>=0.6.0)',"numpy(>=1.1.0)"]
+      package_data={'hdf5io': ['README','INSTALL'] },
+      requires=['tables(>=2.0.4)']
       )
-
-

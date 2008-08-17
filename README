@@ -1,3 +1,39 @@
 $Id$
-Last modified Sun Aug 17 16:06:11 2008 on violator
-update count: 2
+Last modified Sun Aug 17 17:17:24 2008 on violator
+update count: 11
+
+Hdf5io Python module 
+====================
+People familiar with Matlab(TM) and its load save function will find themselves
+at home with this small python module, I guess. It makes it possible to 
+save your variables in "workspace" or from within a function to a hdf5 file, 
+and later load them back in again.
+
+Usage examples
+==============
+
+1. hdf5save
+-----------
+1a. To save all user create variables in current scope to a hdf5-file called 
+"file.h5" type:
+
+hdf5save("file.h5")  
+
+1b. To save specific variables in current scope to a hdf5-file called 
+"file.h5" type:
+ 
+hdfsave("file.h5","var varstring")   
+
+2. hdf5info
+-----------
+To show the contents of a hdf5 file called "file.h5" type:
+
+hdf5info("file.h5")
+
+3. hdf5load
+-----------
+To load the variables from a hdf5 file called "file.h5" type:
+
+hdf5load("file.h5")
+ 
+                      

@@ -1,3 +1,7 @@
 $Id$
-Last modified Sun Aug 17 16:05:50 2008 on violator
-update count: 2
+Last modified Sun Aug 17 17:18:32 2008 on violator
+update count: 3
+
+hdf5save
+--------
+- add "append" option 
