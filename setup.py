@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# $Id: setup.py 30 2008-08-13 18:59:00Z thuswa $
+# $Id$
 # Last modified Sun Aug 17 15:20:50 2008 on violator
 # update count: 7
 

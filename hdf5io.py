@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# $Id: hdf5io.py 32 2008-08-16 23:13:49Z thuswa $
+# $Id$
 # Last modified Sun Aug 17 15:13:19 2008 on violator
 # update count: 265
 
