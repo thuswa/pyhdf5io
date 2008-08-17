@@ -1,13 +1,15 @@
 $Id$
-Last modified Sun Aug 17 17:17:24 2008 on violator
-update count: 11
+Last modified Sun Aug 17 21:50:58 2008 on violator
+update count: 14
 
 Hdf5io Python module 
 ====================
-People familiar with Matlab(TM) and its load save function will find themselves
-at home with this small python module, I guess. It makes it possible to 
-save your variables in "workspace" or from within a function to a hdf5 file, 
-and later load them back in again.
+People familiar with Matlab(TM) and its load and save function will find 
+themselves at home with this small python module, I guess. It makes it 
+possible to save your variables in "workspace" or from within a function 
+to a hdf5 file, and later load them back in again.
+
+Based on pyTables to be able to save and load data to/from hdf5 files.
 
 Usage examples
 ==============

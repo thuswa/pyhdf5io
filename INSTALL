@@ -1,11 +1,11 @@
 $Id$
-Last modified Sun Aug 17 17:33:47 2008 on violator
-update count: 5
+Last modified Sun Aug 17 21:52:20 2008 on violator
+update count: 6
 
 How to install 
 ==============
 
-1. Download pyhdf5io-0.1.tar.gz 
+. Download pyhdf5io-0.1.tar.gz 
 2. Unpack it. 
 3. From the pyhdf5io-0.1 directory run:
 
@@ -13,3 +13,6 @@ How to install
 
 This will copy the package to the appropriate directory for third-party
 modules (/usr/local/lib/python2.5/site-packages/) in their Python installation.
+
+
+Requires: PyTables 2.0.0 or greater

@@ -1,7 +1,23 @@
 #!/usr/bin/env python
 # $Id$
-# Last modified Sun Aug 17 17:25:53 2008 on violator
-# update count: 266
+# Last modified Sun Aug 17 21:52:58 2008 on violator
+# update count: 271
+#
+# pyhdf5io - Python module containing hdf5 load and save functions.
+# Copyright (C) 2008  Albert Thuswaldner
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 """
 A set of I/O functions for the hdf5 file format.
