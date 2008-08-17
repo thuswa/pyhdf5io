@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # $Id$
-# Last modified Sun Aug 17 17:05:21 2008 on violator
-# update count: 12
+# Last modified Sun Aug 17 20:38:45 2008 on violator
+# update count: 18
 
 from distutils.core import setup
 
@@ -10,8 +10,10 @@ setup(name='pyhdf5io',
       description='Python module containing hdf5 load and save function.',
       author='Albert Thuswaldner',
       author_email='thuswa@gmail.com',
-      url='http://code.google.com/p/pyhdf5io/',
+      license='GPLv3',
+      url='http://pyhdf5io.googlecode.com',
       packages=['hdf5io'],
+      package_data = {'hdf5io' : 'src/' },
       package_data={'hdf5io': ['README','INSTALL'] },
-      requires=['tables(>=2.0.4)']
+      requires=['tables(>=2.0.0)']
       )
