@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # $Id$
-# Last modified Sun Aug 17 20:38:45 2008 on violator
-# update count: 18
+# Last modified Sun Aug 17 21:16:51 2008 on violator
+# update count: 22
 
 from distutils.core import setup
 
@@ -13,7 +13,6 @@ setup(name='pyhdf5io',
       license='GPLv3',
       url='http://pyhdf5io.googlecode.com',
       packages=['hdf5io'],
-      package_data = {'hdf5io' : 'src/' },
-      package_data={'hdf5io': ['README','INSTALL'] },
+      package_dir = {'hdf5io' : 'src/' },
       requires=['tables(>=2.0.0)']
       )
