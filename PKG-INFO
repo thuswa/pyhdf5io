@@ -7,7 +7,7 @@ Author: Albert Thuswaldner
 Author-email: thuswa@gmail.com
 License: GPLv3
 Description: 
-    People familiar with Matlab(TM) and its load and save function will find 
+    People familiar with Matlab(TM) and its load and save functions will find 
     themselves at home with this small python module, I guess. It makes it 
     possible to save your variables in "workspace" or from within a function 
     to a hdf5 file, and later load them back in again.        
