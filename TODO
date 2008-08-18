@@ -1,7 +1,11 @@
 $Id$
-Last modified Sun Aug 17 17:18:32 2008 on violator
-update count: 3
+Last modified Mon Aug 18 09:30:29 2008 on CO-W02454 by thuswa
+update count: 4
 
 hdf5save
 --------
 - add "append" option 
+
+hdf5load
+--------
+- add option to select specific variables to be loaded 
