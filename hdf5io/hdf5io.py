@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # $Id$
-# Last modified Sun Aug 17 21:52:58 2008 on violator
-# update count: 271
+# Last modified Mon Aug 18 22:07:23 2008 on violator
+# update count: 296
 #
 # pyhdf5io - Python module containing hdf5 load and save functions.
 # Copyright (C) 2008  Albert Thuswaldner
@@ -49,33 +49,42 @@ def hdf5info(filename):
 
 ###############################################################################
 
-def hdf5load(filename, groupname="/"):
+def hdf5load(filename, selectvars=None, groupname="/"):
     """
     Loads data from hdf5 file
     """
     # Get dictonary from caller namespace
     dictvar=__magicLocals()
-    
+
+    # Check selectvars input 
+    varnames=[]
+    if type(selectvars) is str:
+        varnames = selectvars.split()
+    elif selectvars is not None:
+        raise ValueError, "varstring must be a string!"
+
     # Open file for reading
     f=tables.openFile(filename,'r')
 
     # Walk through group and create variables in workspace
     for group in f.walkGroups(groupname):
       for node in f.listNodes(group):
-          dictvar[node.name] = node.read()
+          if selectvars is None or node.name in varnames: 
+              dictvar[node.name] = node.read()
 
     # Close file
     f.close()
 
 ###############################################################################
 
-def hdf5save(filename, varstring=None, groupname="/"):
+def hdf5save(filename, varstring=None, groupname="/",mode='w'):
     """
     Saves variables to a hdf5 file
     """
     # Get dictonary from caller namespace
     dictvar=__magicLocals()
 
+    # Check varstring input 
     if type(varstring) is str:
         varnames = varstring.split()
     else:
@@ -86,7 +95,7 @@ def hdf5save(filename, varstring=None, groupname="/"):
            raise ValueError, "varstring must be a string!"
       
     # Open file for writing
-    f=tables.openFile(filename,'w')
+    f=tables.openFile(filename,mode)
 
     for key,value in dictvar.iteritems():
         for varname in varnames:
@@ -115,10 +124,11 @@ def __magicLocals(level=1):
 
 
 def __extractvars(vardict):
-    """extract the user defined variables from global dict"""
+    """extract the user defined variables from global dictionary"""
     varnames=[]
     blacklist=['help','In','Out']
     for key,value in vardict.iteritems():
         if key[0] != "_" and not inspect.isclass(value) and not inspect.ismodule(value) and not inspect.isfunction(value) and key not in blacklist:
             varnames.append(key)
     return varnames
+

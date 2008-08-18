@@ -1,6 +1,6 @@
 $Id$
-Last modified Sun Aug 17 23:59:56 2008 on violator
-update count: 15
+Last modified Mon Aug 18 22:09:31 2008 on violator
+update count: 22
 
 Hdf5io Python module 
 ====================
@@ -26,6 +26,12 @@ hdf5save("file.h5")
  
 hdfsave("file.h5","var varstring")   
 
+1c. To append specific variables in current scope to a hdf5-file called 
+"file.h5" type:
+ 
+hdfsave("file.h5","var2","/","a")   
+
+
 2. hdf5info
 -----------
 To show the contents of a hdf5 file called "file.h5" type:
@@ -34,8 +40,11 @@ hdf5info("file.h5")
 
 3. hdf5load
 -----------
-To load the variables from a hdf5 file called "file.h5" type:
+3a. To load the variables from a hdf5 file called "file.h5" type:
 
 hdf5load("file.h5")
  
+3b. To load a specific variable from a hdf5 file called "file.h5" type:
+
+hdf5load("file.h5","var2")
                       
