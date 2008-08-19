@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # $Id$
-# Last modified Mon Aug 18 22:07:23 2008 on violator
-# update count: 296
+# Last modified Wed Aug 20 00:02:32 2008 on violator
+# update count: 301
 #
 # pyhdf5io - Python module containing hdf5 load and save functions.
 # Copyright (C) 2008  Albert Thuswaldner
@@ -35,6 +35,10 @@ import inspect
 def hdf5info(filename):
     """
     Displays the contents of a hdf5 file.
+
+    /Input variables
+    filename: string 
+    name of hdf5 file
     """
     # Open file for reading
     f=tables.openFile(filename,'r')
@@ -51,7 +55,17 @@ def hdf5info(filename):
 
 def hdf5load(filename, selectvars=None, groupname="/"):
     """
-    Loads data from hdf5 file
+    Loads variables from hdf5 file
+
+    /Input variables
+    filename: string 
+    name of hdf5 file
+
+    selectvars: string
+    blank separated list of variables names to be loaded
+
+    groupname: string
+    variable group to be loaded
     """
     # Get dictonary from caller namespace
     dictvar=__magicLocals()
@@ -80,6 +94,19 @@ def hdf5load(filename, selectvars=None, groupname="/"):
 def hdf5save(filename, varstring=None, groupname="/",mode='w'):
     """
     Saves variables to a hdf5 file
+
+    /Input variables
+    filename: string 
+    name of hdf5 file
+
+    varstring: string
+    blank separated list of variables names to be saved
+
+    groupname: string
+    variable group to save to
+
+    mode: string
+    file mode (w=write, a=append)
     """
     # Get dictonary from caller namespace
     dictvar=__magicLocals()
