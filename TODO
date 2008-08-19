@@ -1,10 +1,11 @@
 $Id$
-Last modified Tue Aug 19 10:42:35 2008 on CO-W02454 by thuswa
-update count: 6
+Last modified Tue Aug 19 23:43:20 2008 on violator
+update count: 7
 
 all
 ---
 - fix help text for all functions 
+
 
 hdf5save
 --------
@@ -13,3 +14,8 @@ hdf5save
 hdf5load
 --------
 - DONE: add option to select specific variables to be loaded 
+- include check if file exists
+
+hdf5info
+--------
+- include check if file exists
