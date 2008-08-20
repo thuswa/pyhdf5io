@@ -1,12 +1,12 @@
 #!/usr/bin/env python
 # $Id$
-# Last modified Tue Aug 19 10:26:29 2008 on CO-W02454 by thuswa
-# update count: 32
+# Last modified Wed Aug 20 22:56:34 2008 on violator
+# update count: 33
 
 from distutils.core import setup
 
 setup(name='pyhdf5io',
-      version='0.2',
+      version='0.3',
       description='Python module containing high-level hdf5 load and save functions.',
       author='Albert Thuswaldner',
       author_email='thuswa@gmail.com',
