@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # $Id$
-# Last modified Wed Aug 20 00:02:32 2008 on violator
-# update count: 301
+# Last modified Wed Aug 20 22:47:57 2008 on violator
+# update count: 335
 #
 # pyhdf5io - Python module containing hdf5 load and save functions.
 # Copyright (C) 2008  Albert Thuswaldner
@@ -40,16 +40,18 @@ def hdf5info(filename):
     filename: string 
     name of hdf5 file
     """
-    # Open file for reading
-    f=tables.openFile(filename,'r')
+    # Try to open and read from file 
+    try:
+        f=tables.openFile(filename,'r')
 
-    # Walk through groups and display the nodes
-    for group in f.walkGroups():
-      for node in f.listNodes(group):
-          print node
-
-    # Close file
-    f.close()
+        try:
+            for group in f.walkGroups():
+                for node in f.listNodes(group):
+                    print node
+        finally:
+          f.close()
+    except IOError:
+        print 'Cannot read:', filename
 
 ###############################################################################
 
@@ -77,17 +79,19 @@ def hdf5load(filename, selectvars=None, groupname="/"):
     elif selectvars is not None:
         raise ValueError, "varstring must be a string!"
 
-    # Open file for reading
-    f=tables.openFile(filename,'r')
-
-    # Walk through group and create variables in workspace
-    for group in f.walkGroups(groupname):
-      for node in f.listNodes(group):
-          if selectvars is None or node.name in varnames: 
-              dictvar[node.name] = node.read()
-
-    # Close file
-    f.close()
+    # Try to open and read from file 
+    try:
+        f=tables.openFile(filename,'r')
+        try:
+            # Walk through group and create variables in workspace
+            for group in f.walkGroups(groupname):
+                for node in f.listNodes(group):
+                    if selectvars is None or node.name in varnames: 
+                        dictvar[node.name] = node.read()
+        finally:
+           f.close()
+    except IOError:
+        print 'Cannot read:', filename
 
 ###############################################################################
 
