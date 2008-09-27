@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # $Id$
-# Last modified Wed Aug 20 22:47:57 2008 on violator
-# update count: 335
+# Last modified Sat Sep 27 19:09:12 2008 on violator
+# update count: 337
 #
 # pyhdf5io - Python module containing hdf5 load and save functions.
 # Copyright (C) 2008  Albert Thuswaldner
@@ -23,8 +23,6 @@
 A set of I/O functions for the hdf5 file format.
 
 Based on pyTables to be able to save and load data to/from hdf5 files.
-
-Created Albert Thuswaldner 2008-07-04
 """
 
 import tables
@@ -32,7 +30,7 @@ import inspect
 
 ###############################################################################
 
-def hdf5info(filename):
+def hdf5ls(filename):
     """
     Displays the contents of a hdf5 file.
 
