@@ -1,6 +1,6 @@
 $Id$
-Last modified Mon Aug 18 22:09:31 2008 on violator
-update count: 22
+Last modified Sat Sep 27 19:13:45 2008 on violator
+update count: 24
 
 Hdf5io Python module 
 ====================
@@ -32,11 +32,11 @@ hdfsave("file.h5","var varstring")
 hdfsave("file.h5","var2","/","a")   
 
 
-2. hdf5info
+2. hdf5ls
 -----------
 To show the contents of a hdf5 file called "file.h5" type:
 
-hdf5info("file.h5")
+hdf5ls("file.h5")
 
 3. hdf5load
 -----------
