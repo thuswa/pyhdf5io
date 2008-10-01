@@ -1,6 +1,6 @@
 $Id$
-Last modified Sat Sep 27 19:13:45 2008 on violator
-update count: 24
+Last modified Wed Oct  1 19:35:43 2008 on violator
+update count: 25
 
 Hdf5io Python module 
 ====================
@@ -30,7 +30,6 @@ hdfsave("file.h5","var varstring")
 "file.h5" type:
  
 hdfsave("file.h5","var2","/","a")   
-
 
 2. hdf5ls
 -----------
