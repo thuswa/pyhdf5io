@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # $Id$
-# Last modified Sat Sep 27 19:14:23 2008 on violator
-# update count: 10
+# Last modified Wed Oct  1 19:33:55 2008 on violator
+# update count: 11
 
 from hdf5io import *
 
@@ -23,6 +23,6 @@ def hdf5test():
     hdf5save("test.h5",'var2',"/",'a')
 
     # Show file content again 
-    hdf5info("test.h5")
+    hdf5ls("test.h5")
 
     
