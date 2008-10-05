@@ -1,6 +1,6 @@
 $Id$
-Last modified Wed Oct  1 19:35:43 2008 on violator
-update count: 25
+Last modified Sun Oct  5 23:04:18 2008 on violator
+update count: 26
 
 Hdf5io Python module 
 ====================
@@ -46,4 +46,9 @@ hdf5load("file.h5")
 3b. To load a specific variable from a hdf5 file called "file.h5" type:
 
 hdf5load("file.h5","var2")
+
+3c. To load variables in a specific group  from a hdf5 file called "file.h5" 
+type:
+
+hdf5load("file.h5",None,"/group1")
                       
