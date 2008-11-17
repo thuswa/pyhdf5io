@@ -1,6 +1,6 @@
 $Id$
-Last modified Sat Sep 27 19:13:57 2008 on violator
-update count: 10
+Last modified Mon Nov 17 11:34:06 2008 on CO-W02454 by thuswa
+update count: 11
 
 all
 ---
@@ -19,3 +19,4 @@ hdf5load
 hdf5ls
 --------
 - DONE: include check if file exists
+- display attributes
