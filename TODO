@@ -1,20 +1,22 @@
 $Id$
-Last modified Mon Nov 17 11:34:06 2008 on CO-W02454 by thuswa
-update count: 11
+Last modified Fri Jan 09 17:00:04 2009 on CO-W02454 by thuswa
+update count: 15
 
 all
 ---
 - DONE: fix help text for all functions 
 
-
 hdf5save
 --------
 - DONE: add "append" option 
+- use *args to provide more flexibility on how use the function. 
+- provide the option to set attributes 
 
 hdf5load
 --------
 - DONE: add option to select specific variables to be loaded 
 - DONE: include check if file exists
+- use *args to provide more flexibility on how use the function. 
 
 hdf5ls
 --------
