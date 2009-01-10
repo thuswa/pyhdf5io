@@ -1,6 +1,6 @@
 $Id$
-Last modified Fri Jan 09 17:00:04 2009 on CO-W02454 by thuswa
-update count: 15
+Last modified Sun Jan 11 00:21:21 2009 on violator
+update count: 16
 
 all
 ---
@@ -17,6 +17,7 @@ hdf5load
 - DONE: add option to select specific variables to be loaded 
 - DONE: include check if file exists
 - use *args to provide more flexibility on how use the function. 
+- Include group name in name for the loaded variables to avoid conflicts.
 
 hdf5ls
 --------
