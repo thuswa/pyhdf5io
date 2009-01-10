@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # $Id$
-# Last modified Sat Sep 27 19:09:12 2008 on violator
-# update count: 337
+# Last modified Sat Jan 10 23:24:57 2009 on violator
+# update count: 338
 #
 # pyhdf5io - Python module containing hdf5 load and save functions.
 # Copyright (C) 2008  Albert Thuswaldner
@@ -157,7 +157,11 @@ def __extractvars(vardict):
     varnames=[]
     blacklist=['help','In','Out']
     for key,value in vardict.iteritems():
-        if key[0] != "_" and not inspect.isclass(value) and not inspect.ismodule(value) and not inspect.isfunction(value) and key not in blacklist:
+        if key[0] != "_" \
+               and not inspect.isclass(value) \
+               and not inspect.ismodule(value) \
+               and not inspect.isfunction(value) \
+               and key not in blacklist:
             varnames.append(key)
     return varnames
 
