@@ -1,6 +1,6 @@
 $Id$
-Last modified Sun Jan 11 00:21:21 2009 on violator
-update count: 16
+Last modified Wed Jan 14 00:48:58 2009 on violator
+update count: 19
 
 all
 ---
@@ -9,15 +9,18 @@ all
 hdf5save
 --------
 - DONE: add "append" option 
-- use *args to provide more flexibility on how use the function. 
+- DONE: use *args to provide more flexibility on how use the function. 
 - provide the option to set attributes 
+- fix append option, add groups, avoid variables to be overwritten.  
+- Update help text
 
 hdf5load
 --------
 - DONE: add option to select specific variables to be loaded 
 - DONE: include check if file exists
-- use *args to provide more flexibility on how use the function. 
+- DONE: use *args to provide more flexibility on how use the function. 
 - Include group name in name for the loaded variables to avoid conflicts.
+- Update help text
 
 hdf5ls
 --------
