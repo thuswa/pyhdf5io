@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # $Id$
-# Last modified Sat Jan 10 23:24:57 2009 on violator
-# update count: 338
+# Last modified Wed Jan 14 00:37:28 2009 on violator
+# update count: 372
 #
 # pyhdf5io - Python module containing hdf5 load and save functions.
 # Copyright (C) 2008  Albert Thuswaldner
@@ -53,30 +53,34 @@ def hdf5ls(filename):
 
 ###############################################################################
 
-def hdf5load(filename, selectvars=None, groupname="/"):
+def hdf5load(*args):
     """
     Loads variables from hdf5 file
+  
+    hdf5load('file.h5', '/group', 'var1', 'var2', ....)
+    hdf5load('file.h5', '/group var1 var2 ....')
+    hdf5load('file.h5', '/group var1', 'var2', 'var3 ....')
 
     /Input variables
     filename: string 
     name of hdf5 file
 
-    selectvars: string
-    blank separated list of variables names to be loaded
-
     groupname: string
     variable group to be loaded
+
+    selectvars: string
+    blank separated list of variables names to be loaded
     """
+
     # Get dictonary from caller namespace
     dictvar=__magicLocals()
 
-    # Check selectvars input 
-    varnames=[]
-    if type(selectvars) is str:
-        varnames = selectvars.split()
-    elif selectvars is not None:
-        raise ValueError, "varstring must be a string!"
-
+    # Extract input arguments
+    inputargs=__extractargs(*args)
+    filename=inputargs[0]
+    groupname=inputargs[1]
+    varnames=inputargs[2]
+       
     # Try to open and read from file 
     try:
         f=tables.openFile(filename,'r')
@@ -84,7 +88,7 @@ def hdf5load(filename, selectvars=None, groupname="/"):
             # Walk through group and create variables in workspace
             for group in f.walkGroups(groupname):
                 for node in f.listNodes(group):
-                    if selectvars is None or node.name in varnames: 
+                    if not varnames or node.name in varnames: 
                         dictvar[node.name] = node.read()
         finally:
            f.close()
@@ -93,9 +97,11 @@ def hdf5load(filename, selectvars=None, groupname="/"):
 
 ###############################################################################
 
-def hdf5save(filename, varstring=None, groupname="/",mode='w'):
+def hdf5save(*args):
     """
     Saves variables to a hdf5 file
+
+    hdf5save(filename, varstring=None, groupname="/",mode='w'):
 
     /Input variables
     filename: string 
@@ -110,27 +116,39 @@ def hdf5save(filename, varstring=None, groupname="/",mode='w'):
     mode: string
     file mode (w=write, a=append)
     """
+
+    mode='w'
+    
     # Get dictonary from caller namespace
     dictvar=__magicLocals()
 
-    # Check varstring input 
-    if type(varstring) is str:
-        varnames = varstring.split()
-    else:
-        if varstring is None:
-           varnames = __extractvars(dictvar)
-#           print varnames   # for debugging
-        else:
-           raise ValueError, "varstring must be a string!"
-      
+    # Extract input arguments
+    inputargs=__extractargs(*args)
+    filename=inputargs[0]
+    groupname=inputargs[1]
+    varnames=inputargs[2]
+
+    # If no variables specified by the user 
+    if not varnames:
+        varnames = __extractvars(dictvar)
+        # print varnames   # for debugging
+
     # Open file for writing
     f=tables.openFile(filename,mode)
+
+    # Create group
+    g=f.root  
+    if groupname != "/":
+        grouplist = groupname.split('/')
+        for group in grouplist:
+            if group:
+                g=f.createGroup(g,group)
 
     for key,value in dictvar.iteritems():
         for varname in varnames:
 #            print key, varname  # for debugging
             if key == varname:
-               f.createArray(groupname,key,value)
+               f.createArray(g,key,value)
 
     # Close file
     f.close()
@@ -151,9 +169,33 @@ def __magicLocals(level=1):
     """
     return inspect.getouterframes(inspect.currentframe())[1+level][0].f_locals
 
+def __extractargs(*args):
+    """check and identify input variables"""  
+    if len(args) >= 1:
+        # transform args tuple to list
+        arglist=list(args)
+        # Pop the presumed filename from the args list 
+        filename=arglist.pop(0)
+        # loop the rest of the args list and extract group/variable names
+        varnames=[]
+        for arg in arglist:
+            if type(arg) is str:
+                varnames = varnames+arg.split()
+            else:
+                raise ValueError, "variable input must be of type string"
+    else:
+        raise ValueError, "Too few arguments"
 
+    # Check if varname list contains a group name
+    if varnames[0][0] == "/":
+        groupname=varnames.pop(0)
+    else:
+        groupname="/"
+
+    return (filename, groupname, varnames)
+        
 def __extractvars(vardict):
-    """extract the user defined variables from global dictionary"""
+    """extract the user created variables from global dictionary"""
     varnames=[]
     blacklist=['help','In','Out']
     for key,value in vardict.iteritems():
