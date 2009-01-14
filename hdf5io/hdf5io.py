@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # $Id$
-# Last modified Wed Jan 14 00:37:28 2009 on violator
-# update count: 372
+# Last modified Wed Jan 14 22:25:23 2009 on violator
+# update count: 378
 #
 # pyhdf5io - Python module containing hdf5 load and save functions.
 # Copyright (C) 2008  Albert Thuswaldner
@@ -34,9 +34,8 @@ def hdf5ls(filename):
     """
     Displays the contents of a hdf5 file.
 
-    /Input variables
-    filename: string 
-    name of hdf5 file
+    Syntax:
+     hdf5ls('filename')
     """
     # Try to open and read from file 
     try:
@@ -55,21 +54,24 @@ def hdf5ls(filename):
 
 def hdf5load(*args):
     """
-    Loads variables from hdf5 file
-  
-    hdf5load('file.h5', '/group', 'var1', 'var2', ....)
-    hdf5load('file.h5', '/group var1 var2 ....')
-    hdf5load('file.h5', '/group var1', 'var2', 'var3 ....')
+    Loads variables from hdf5 file.
+    
+    Syntax:
+     hdf5load('filename')
+     hdf5load('filename', '/group')
+     hdf5load('filename', 'var1', 'var2', ....)
+     hdf5load('filename', '/group', 'var1', 'var2', ....)
+     hdf5load('filename', '/group var1 var2 ....')
+     hdf5load('filename', '/group var1', 'var2', 'var3 ....')
 
-    /Input variables
-    filename: string 
-    name of hdf5 file
-
-    groupname: string
-    variable group to be loaded
-
-    selectvars: string
-    blank separated list of variables names to be loaded
+    Description: 
+     hdf5load loads variables from a hdf5 file to the namespace that the
+     function is called from. The syntax is flexible which means that the
+     function can be called in several different ways (see above). If only
+     the file name is given, all variables are loaded. In addition, if
+     a group name is supplied, all variables from that group is loaded.
+     It is also possible to specify exactly which variables that should
+     be loaded. 
     """
 
     # Get dictonary from caller namespace
@@ -99,24 +101,25 @@ def hdf5load(*args):
 
 def hdf5save(*args):
     """
-    Saves variables to a hdf5 file
+    Saves variables to a hdf5 file.
+    
+    Syntax:
+     hdf5save('filename')
+     hdf5save('filename', '/group')
+     hdf5save('filename', 'var1', 'var2', ....)
+     hdf5save('filename', '/group', 'var1', 'var2', ....)
+     hdf5save('filename', '/group var1 var2 ....')
+     hdf5save('filename', '/group var1', 'var2', 'var3 ....')
 
-    hdf5save(filename, varstring=None, groupname="/",mode='w'):
-
-    /Input variables
-    filename: string 
-    name of hdf5 file
-
-    varstring: string
-    blank separated list of variables names to be saved
-
-    groupname: string
-    variable group to save to
-
-    mode: string
-    file mode (w=write, a=append)
+    Description: 
+     hdf5save saves variables from the current namespace to a hdf5 file.
+     The syntax is flexible which means that the function can be called
+     in several different ways (see above). If only the file name is given,
+     all variables are saved to the root group of the hdf5 file. In addition,
+     if a group name is supplied, all variables can be saved to a specific
+     group. It is also possible to specify exactly which variables that should
+     be saved. 
     """
-
     mode='w'
     
     # Get dictonary from caller namespace
