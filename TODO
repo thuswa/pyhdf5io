@@ -1,6 +1,6 @@
 $Id$
-Last modified Wed Jan 14 00:56:44 2009 on violator
-update count: 20
+Last modified Wed Jan 14 22:29:22 2009 on violator
+update count: 24
 
 all
 ---
@@ -13,14 +13,17 @@ hdf5save
 - provide the option to set attributes 
 - fix append option, add groups, avoid variables to be overwritten.  
 - Update help text
+- Add option to use wildcard '*' to match variable name
 
 hdf5load
 --------
 - DONE: add option to select specific variables to be loaded 
 - DONE: include check if file exists
 - DONE: use *args to provide more flexibility on how use the function. 
-- DEFERRED: Include group name in name for the loaded variables to avoid conflicts.
+- DEFERRED: Include group name in name for the loaded variables 
+  to avoid conflicts.
 - Update help text
+- Add option to use wildcard '*' to match variable name
 
 hdf5ls
 --------
