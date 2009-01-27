@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # $Id$
-# Last modified Wed Jan 14 22:25:23 2009 on violator
-# update count: 378
+# Last modified Tue Jan 27 22:52:06 2009 on violator
+# update count: 393
 #
 # pyhdf5io - Python module containing hdf5 load and save functions.
 # Copyright (C) 2008  Albert Thuswaldner
@@ -82,16 +82,17 @@ def hdf5load(*args):
     filename=inputargs[0]
     groupname=inputargs[1]
     varnames=inputargs[2]
-       
+
     # Try to open and read from file 
     try:
         f=tables.openFile(filename,'r')
         try:
             # Walk through group and create variables in workspace
             for group in f.walkGroups(groupname):
-                for node in f.listNodes(group):
-                    if not varnames or node.name in varnames: 
-                        dictvar[node.name] = node.read()
+                # Walk through only the leaves (don't list the groups)
+                for leaf in group._f_walkNodes('Leaf'):
+                    if not varnames or leaf.name in varnames: 
+                        dictvar[leaf.name] = leaf.read()
         finally:
            f.close()
     except IOError:
@@ -190,10 +191,10 @@ def __extractargs(*args):
         raise ValueError, "Too few arguments"
 
     # Check if varname list contains a group name
-    if varnames[0][0] == "/":
-        groupname=varnames.pop(0)
-    else:
-        groupname="/"
+    groupname="/"
+    if varnames:
+        if varnames[0][0] == "/":
+            groupname=varnames.pop(0)
 
     return (filename, groupname, varnames)
         
