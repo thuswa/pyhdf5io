@@ -1,7 +1,45 @@
 #!/bin/bash
 # $Id$
-# Last modified Thu Jan 29 09:23:43 2009 on CO-W02454 by thuswa
-# Update count: 40
+# Last modified Thu Jan 29 09:41:09 2009 on CO-W02454 by thuswa
+# Update count: 53
 #
 # Created 2009-01-29, Albert Thuswaldner
 
+if [ $# -lt 1 ]; then 
+    cat <<HELP
+release  Tag, build and register a new release of pyhdf5io. 
+  
+USAGE: ./release versionnumber 
+
+HELP
+    exit 0
+fi  
+
+SRVREPO="https://pyhdf5io.googlecode.com/svn"
+SUBDIR="trunk/"
+TAGNAME="pyhdf5io-"$1
+
+# Set repodir
+REPODIR=$SRVREPO"/"$SUBDIR
+TAGDIR=$SRVREPO"/tags/"$TAGNAME
+
+# Ask user to confirm
+echo Tagging....
+echo $REPODIR to: 
+echo $TAGDIR
+
+while true; do
+  read -p "Confirm (y/n)? " 
+  case $REPLY in
+      y* | Y* ) 
+	  svn copy $REPODIR $TAGDIR -m "$MESSAGE"
+	  break;
+	  ;; 
+      [nN]* )   command ; break 
+	  ;;
+      q* ) exit 
+	  ;;
+      * ) echo "Enter yes or no" 
+	  ;;
+  esac
+done
