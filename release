@@ -1,23 +1,29 @@
 #!/bin/bash
 # $Id$
-# Last modified Thu Jan 29 09:41:09 2009 on CO-W02454 by thuswa
-# Update count: 53
+# Last modified Fri Jan 30 00:29:56 2009 on violator
+# Update count: 84
 #
 # Created 2009-01-29, Albert Thuswaldner
 
 if [ $# -lt 1 ]; then 
     cat <<HELP
-release  Tag, build and register a new release of pyhdf5io. 
+release  tag, build and register a new release of pyhdf5io. 
   
 USAGE: ./release versionnumber 
 
 HELP
     exit 0
 fi  
+# Set variables       
+VER=$1
 
+# Get repository info
 SRVREPO="https://pyhdf5io.googlecode.com/svn"
 SUBDIR="trunk/"
-TAGNAME="pyhdf5io-"$1
+TAGNAME="pyhdf5io-"${VER//./-}
+MESSAGE="Tagging version "$VER
+INITFILE='hdf5io/__init__.py'
+SETUPFILE='setup.py'
 
 # Set repodir
 REPODIR=$SRVREPO"/"$SUBDIR
@@ -32,7 +38,22 @@ while true; do
   read -p "Confirm (y/n)? " 
   case $REPLY in
       y* | Y* ) 
+	  # Update files with new version number
+	  sed "s/__version__\ =\ [^ ]*/__version__\ =\ '$VER'/g" \
+	      $INITFILE > temp 
+	  mv -f temp $INITFILE
+	  sed "s/version=[^ ]*/version='$VER',/g" $SETUPFILE > temp 
+	  mv -f temp $SETUPFILE
+
+	  svn ci -m "Uped version" $INITFILE $SETUPFILE  
+	  
+	  # Tagging version
 	  svn copy $REPODIR $TAGDIR -m "$MESSAGE"
+
+	  # bulid source distribution and register 
+	  python ./setup.py sdist
+	  python ./setup.py register
+
 	  break;
 	  ;; 
       [nN]* )   command ; break 
