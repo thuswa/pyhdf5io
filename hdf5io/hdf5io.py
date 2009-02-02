@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # $Id$
-# Last modified Tue Jan 27 22:52:06 2009 on violator
-# update count: 393
+# Last modified Tue Feb  3 00:19:00 2009 on violator
+# update count: 403
 #
 # pyhdf5io - Python module containing hdf5 load and save functions.
 # Copyright (C) 2008  Albert Thuswaldner
@@ -24,9 +24,9 @@ A set of I/O functions for the hdf5 file format.
 
 Based on pyTables to be able to save and load data to/from hdf5 files.
 """
-
-import tables
 import inspect
+import re
+import tables
 
 ###############################################################################
 
@@ -91,7 +91,7 @@ def hdf5load(*args):
             for group in f.walkGroups(groupname):
                 # Walk through only the leaves (don't list the groups)
                 for leaf in group._f_walkNodes('Leaf'):
-                    if not varnames or leaf.name in varnames: 
+                    if not varnames or varnames.match(leaf.name) is not None: 
                         dictvar[leaf.name] = leaf.read()
         finally:
            f.close()
@@ -149,10 +149,9 @@ def hdf5save(*args):
                 g=f.createGroup(g,group)
 
     for key,value in dictvar.iteritems():
-        for varname in varnames:
 #            print key, varname  # for debugging
-            if key == varname:
-               f.createArray(g,key,value)
+        if varnames.match(key):
+            f.createArray(g,key,value)
 
     # Close file
     f.close()
@@ -181,15 +180,22 @@ def __extractargs(*args):
         # Pop the presumed filename from the args list 
         filename=arglist.pop(0)
         # loop the rest of the args list and extract group/variable names
-        varnames=[]
+        varmatch=''
         for arg in arglist:
             if type(arg) is str:
-                varnames = varnames+arg.split()
+                varmatch = varmatch+'|'+arg.split()
             else:
                 raise ValueError, "variable input must be of type string"
     else:
         raise ValueError, "Too few arguments"
 
+    # Compile regulare expression from match list
+    if varmatch:
+        varmatch='('+varmatch+')'
+    else:
+        varmatch='.'
+    varnames=re.compile(varmatch)
+    
     # Check if varname list contains a group name
     groupname="/"
     if varnames:
