@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # $Id$
-# Last modified Tue Feb  3 00:19:00 2009 on violator
-# update count: 403
+# Last modified Tue Feb 03 10:16:40 2009 on CO-W02454 by THUSWA
+# update count: 404
 #
 # pyhdf5io - Python module containing hdf5 load and save functions.
 # Copyright (C) 2008  Albert Thuswaldner
@@ -91,7 +91,7 @@ def hdf5load(*args):
             for group in f.walkGroups(groupname):
                 # Walk through only the leaves (don't list the groups)
                 for leaf in group._f_walkNodes('Leaf'):
-                    if not varnames or varnames.match(leaf.name) is not None: 
+                    if not varnames or varnames.match(leaf.name): 
                         dictvar[leaf.name] = leaf.read()
         finally:
            f.close()
