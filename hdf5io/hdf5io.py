@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # $Id$
-# Last modified Tue Feb 03 10:16:40 2009 on CO-W02454 by THUSWA
-# update count: 404
+# Last modified Tue Feb  3 23:33:08 2009 on violator
+# update count: 419
 #
 # pyhdf5io - Python module containing hdf5 load and save functions.
 # Copyright (C) 2008  Albert Thuswaldner
@@ -174,6 +174,8 @@ def __magicLocals(level=1):
 
 def __extractargs(*args):
     """check and identify input variables"""  
+
+    groupname="/"
     if len(args) >= 1:
         # transform args tuple to list
         arglist=list(args)
@@ -183,7 +185,12 @@ def __extractargs(*args):
         varmatch=''
         for arg in arglist:
             if type(arg) is str:
-                varmatch = varmatch+'|'+arg.split()
+                # Check if varname list contains a group name
+                if arg.split()[0][0] == "/":
+                    groupname=arg.split()[0]
+                else:
+                    varmatch = varmatch+'|'+arg.replace(" ","|")
+
             else:
                 raise ValueError, "variable input must be of type string"
     else:
@@ -192,15 +199,10 @@ def __extractargs(*args):
     # Compile regulare expression from match list
     if varmatch:
         varmatch='('+varmatch+')'
+        print varmatch
     else:
         varmatch='.'
     varnames=re.compile(varmatch)
-    
-    # Check if varname list contains a group name
-    groupname="/"
-    if varnames:
-        if varnames[0][0] == "/":
-            groupname=varnames.pop(0)
 
     return (filename, groupname, varnames)
         
