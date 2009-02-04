@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # $Id$
-# Last modified Wed Feb 04 13:12:11 2009 on CO-W02454 by THUSWA
-# update count: 423
+# Last modified Wed Feb 04 13:13:12 2009 on CO-W02454 by THUSWA
+# update count: 424
 #
 # pyhdf5io - Python module containing hdf5 load and save functions.
 # Copyright (C) 2008  Albert Thuswaldner
@@ -109,6 +109,7 @@ def hdf5save(*args):
     
     Syntax:
      hdf5save('filename')
+     hdf5save('filename', 'v*')
      hdf5save('filename', '/group')
      hdf5save('filename', 'var1', 'var2', ....)
      hdf5save('filename', '/group', 'var1', 'var2', ....)
