@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # $Id$
-# Last modified Tue Feb  3 23:33:08 2009 on violator
-# update count: 419
+# Last modified Wed Feb 04 13:12:11 2009 on CO-W02454 by THUSWA
+# update count: 423
 #
 # pyhdf5io - Python module containing hdf5 load and save functions.
 # Copyright (C) 2008  Albert Thuswaldner
@@ -58,6 +58,7 @@ def hdf5load(*args):
     
     Syntax:
      hdf5load('filename')
+     hdf5load('filename', 'v*')
      hdf5load('filename', '/group')
      hdf5load('filename', 'var1', 'var2', ....)
      hdf5load('filename', '/group', 'var1', 'var2', ....)
@@ -65,13 +66,15 @@ def hdf5load(*args):
      hdf5load('filename', '/group var1', 'var2', 'var3 ....')
 
     Description: 
-     hdf5load loads variables from a hdf5 file to the namespace that the
-     function is called from. The syntax is flexible which means that the
+     hdf5load loads variables from a hdf5 file to the namespace from where
+     the function is called. The syntax is flexible which means that the
      function can be called in several different ways (see above). If only
      the file name is given, all variables are loaded. In addition, if
      a group name is supplied, all variables from that group is loaded.
      It is also possible to specify exactly which variables that should
-     be loaded. 
+     be loaded either by the complete variable name or by using wildcards '*'.
+     In fact regular expression could be used, please consult the the python 
+     documentation on who regexp are used.
     """
 
     # Get dictonary from caller namespace
@@ -119,7 +122,9 @@ def hdf5save(*args):
      all variables are saved to the root group of the hdf5 file. In addition,
      if a group name is supplied, all variables can be saved to a specific
      group. It is also possible to specify exactly which variables that should
-     be saved. 
+     be saved either by the complete variable name or by using wildcards '*'.
+     In fact regular expression could be used, please consult the the python 
+     documentation on who regexp are used.
     """
     mode='w'
     
