@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # $Id$
-# Last modified Wed Feb 04 13:13:12 2009 on CO-W02454 by THUSWA
-# update count: 424
+# Last modified Thu Feb  5 22:45:13 2009 on violator
+# update count: 438
 #
 # pyhdf5io - Python module containing hdf5 load and save functions.
 # Copyright (C) 2008  Albert Thuswaldner
@@ -65,7 +65,7 @@ def hdf5load(*args):
      hdf5load('filename', '/group var1 var2 ....')
      hdf5load('filename', '/group var1', 'var2', 'var3 ....')
 
-    Description: 
+    Description:
      hdf5load loads variables from a hdf5 file to the namespace from where
      the function is called. The syntax is flexible which means that the
      function can be called in several different ways (see above). If only
@@ -73,8 +73,6 @@ def hdf5load(*args):
      a group name is supplied, all variables from that group is loaded.
      It is also possible to specify exactly which variables that should
      be loaded either by the complete variable name or by using wildcards '*'.
-     In fact regular expression could be used, please consult the the python 
-     documentation on who regexp are used.
     """
 
     # Get dictonary from caller namespace
@@ -116,7 +114,7 @@ def hdf5save(*args):
      hdf5save('filename', '/group var1 var2 ....')
      hdf5save('filename', '/group var1', 'var2', 'var3 ....')
 
-    Description: 
+    Description:
      hdf5save saves variables from the current namespace to a hdf5 file.
      The syntax is flexible which means that the function can be called
      in several different ways (see above). If only the file name is given,
@@ -124,8 +122,6 @@ def hdf5save(*args):
      if a group name is supplied, all variables can be saved to a specific
      group. It is also possible to specify exactly which variables that should
      be saved either by the complete variable name or by using wildcards '*'.
-     In fact regular expression could be used, please consult the the python 
-     documentation on who regexp are used.
     """
     mode='w'
     
@@ -182,21 +178,27 @@ def __extractargs(*args):
     """check and identify input variables"""  
 
     groupname="/"
+    first=1
     if len(args) >= 1:
         # transform args tuple to list
         arglist=list(args)
         # Pop the presumed filename from the args list 
         filename=arglist.pop(0)
+
         # loop the rest of the args list and extract group/variable names
-        varmatch=''
         for arg in arglist:
             if type(arg) is str:
-                # Check if varname list contains a group name
-                if arg.split()[0][0] == "/":
-                    groupname=arg.split()[0]
-                else:
-                    varmatch = varmatch+'|'+arg.replace(" ","|")
-
+                varlist=arg.split()
+                for var in varlist:
+                    # Check if variable name list contains a group name
+                    if var[0] == "/":
+                        groupname=var
+                    else:
+                        if first:  
+                            varmatch=var
+                        else:
+                            varmatch = varmatch+'|'+var
+                            first=0
             else:
                 raise ValueError, "variable input must be of type string"
     else:
@@ -204,8 +206,7 @@ def __extractargs(*args):
 
     # Compile regulare expression from match list
     if varmatch:
-        varmatch='('+varmatch+')'
-        print varmatch
+        varmatch='('+varmatch.replace("*",".*")+')'
     else:
         varmatch='.'
     varnames=re.compile(varmatch)
@@ -224,4 +225,3 @@ def __extractvars(vardict):
                and key not in blacklist:
             varnames.append(key)
     return varnames
-
