@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # $Id$
-# Last modified Thu Feb  5 22:45:13 2009 on violator
-# update count: 438
+# Last modified Sun Feb  8 21:20:59 2009 on violator
+# update count: 451
 #
 # pyhdf5io - Python module containing hdf5 load and save functions.
 # Copyright (C) 2008  Albert Thuswaldner
@@ -134,11 +134,6 @@ def hdf5save(*args):
     groupname=inputargs[1]
     varnames=inputargs[2]
 
-    # If no variables specified by the user 
-    if not varnames:
-        varnames = __extractvars(dictvar)
-        # print varnames   # for debugging
-
     # Open file for writing
     f=tables.openFile(filename,mode)
 
@@ -151,8 +146,7 @@ def hdf5save(*args):
                 g=f.createGroup(g,group)
 
     for key,value in dictvar.iteritems():
-#            print key, varname  # for debugging
-        if varnames.match(key):
+        if varnames.match(key) and __checkvars(key, value):
             f.createArray(g,key,value)
 
     # Close file
@@ -178,7 +172,9 @@ def __extractargs(*args):
     """check and identify input variables"""  
 
     groupname="/"
+    varmatch='.'
     first=1
+    
     if len(args) >= 1:
         # transform args tuple to list
         arglist=list(args)
@@ -207,21 +203,20 @@ def __extractargs(*args):
     # Compile regulare expression from match list
     if varmatch:
         varmatch='('+varmatch.replace("*",".*")+')'
-    else:
-        varmatch='.'
+
     varnames=re.compile(varmatch)
 
     return (filename, groupname, varnames)
         
-def __extractvars(vardict):
-    """extract the user created variables from global dictionary"""
-    varnames=[]
+def __checkvars(key, value):
+    """check variables from global dictionary"""
     blacklist=['help','In','Out']
-    for key,value in vardict.iteritems():
-        if key[0] != "_" \
-               and not inspect.isclass(value) \
-               and not inspect.ismodule(value) \
-               and not inspect.isfunction(value) \
-               and key not in blacklist:
-            varnames.append(key)
-    return varnames
+    if key[0] == "_" \
+           or inspect.isclass(value) \
+           or inspect.ismodule(value) \
+           or inspect.isfunction(value) \
+           or key in blacklist:
+        return 0
+    else:
+        return 1
+
