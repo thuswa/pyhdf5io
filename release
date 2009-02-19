@@ -1,13 +1,13 @@
 #!/bin/bash
 # $Id$
-# Last modified Sun Feb  8 23:23:35 2009 on violator
-# Update count: 88
+# Last modified Thu Feb 19 23:33:52 2009 on violator
+# Update count: 98
 #
 # Created 2009-01-29, Albert Thuswaldner
 
 if [ $# -lt 1 ]; then 
     cat <<HELP
-release  tag, build and register a new release of pyhdf5io. 
+release  tag, build and register a new release of the project. 
   
 USAGE: ./release versionnumber 
 
@@ -18,12 +18,13 @@ fi
 VER=$1
 
 # Get repository info
-SRVREPO="https://pyhdf5io.googlecode.com/svn"
+PROJ="pyhdf5io"
+SRVREPO="https://"$PROJ$".googlecode.com/svn"
 SUBDIR="trunk/"
-TAGNAME="pyhdf5io-"${VER//./-}
+TAGNAME=$PROJ"-"${VER//./-}
 MESSAGE="Tagging version "$VER
-INITFILE='hdf5io/__init__.py'
-SETUPFILE='setup.py'
+INITFILE=$PROJ"/__init__.py"
+SETUPFILE="setup.py"
 
 # Set repodir
 REPODIR=$SRVREPO"/"$SUBDIR
@@ -53,8 +54,8 @@ while true; do
 	  # bulid source distribution and register 
 	  python ./setup.py sdist
 	  python ./setup.py register
-	  python ./googlecode_upload.py -s "version "$VER -p pyhdf5io \
-	      dist/pyhdf5io-$VER.tar.gz
+	  python ./googlecode_upload.py -s "version "$VER -p $PROJ \
+	      dist/$PROJ-$VER.tar.gz
  
 	  break;
 	  ;; 
