@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # $Id$
-# Last modified Sun Feb  8 21:20:59 2009 on violator
-# update count: 451
+# Last modified Sat Feb 21 00:23:15 2009 on violator
+# update count: 470
 #
 # pyhdf5io - Python module containing hdf5 load and save functions.
 # Copyright (C) 2008  Albert Thuswaldner
@@ -113,7 +113,8 @@ def hdf5save(*args):
      hdf5save('filename', '/group', 'var1', 'var2', ....)
      hdf5save('filename', '/group var1 var2 ....')
      hdf5save('filename', '/group var1', 'var2', 'var3 ....')
-
+     hdf5save('+filename')
+     
     Description:
      hdf5save saves variables from the current namespace to a hdf5 file.
      The syntax is flexible which means that the function can be called
@@ -122,9 +123,9 @@ def hdf5save(*args):
      if a group name is supplied, all variables can be saved to a specific
      group. It is also possible to specify exactly which variables that should
      be saved either by the complete variable name or by using wildcards '*'.
+     Appending data to an existing hdf5 file is possible. To invoke this
+     special mode just add a + sign to the start of the file name.  
     """
-    mode='w'
-    
     # Get dictonary from caller namespace
     dictvar=__magicLocals()
 
@@ -133,7 +134,8 @@ def hdf5save(*args):
     filename=inputargs[0]
     groupname=inputargs[1]
     varnames=inputargs[2]
-
+    mode=inputargs[3]
+    
     # Open file for writing
     f=tables.openFile(filename,mode)
 
@@ -142,8 +144,12 @@ def hdf5save(*args):
     if groupname != "/":
         grouplist = groupname.split('/')
         for group in grouplist:
-            if group:
-                g=f.createGroup(g,group)
+            # Check if group exists
+            if g.__contains__(group): 
+                g=g._f_getChild(group)
+            else:
+                if group:
+                    g=f.createGroup(g,group)
 
     for key,value in dictvar.iteritems():
         if varnames.match(key) and __checkvars(key, value):
@@ -174,13 +180,18 @@ def __extractargs(*args):
     groupname="/"
     varmatch='.'
     first=1
+    mode="w"
     
     if len(args) >= 1:
         # transform args tuple to list
         arglist=list(args)
         # Pop the presumed filename from the args list 
         filename=arglist.pop(0)
-
+        # Check if append (only applicable for hdf5save) 
+        if filename[0] == "+":
+            mode="a"
+            filename=filename[1:]
+            
         # loop the rest of the args list and extract group/variable names
         for arg in arglist:
             if type(arg) is str:
@@ -206,7 +217,7 @@ def __extractargs(*args):
 
     varnames=re.compile(varmatch)
 
-    return (filename, groupname, varnames)
+    return (filename, groupname, varnames, mode)
         
 def __checkvars(key, value):
     """check variables from global dictionary"""
