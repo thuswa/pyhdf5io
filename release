@@ -1,7 +1,7 @@
 #!/bin/bash
 # $Id$
-# Last modified Thu Feb 19 23:33:52 2009 on violator
-# Update count: 98
+# Last modified Sat Feb 21 00:36:42 2009 on violator
+# Update count: 99
 #
 # Created 2009-01-29, Albert Thuswaldner
 
@@ -23,7 +23,7 @@ SRVREPO="https://"$PROJ$".googlecode.com/svn"
 SUBDIR="trunk/"
 TAGNAME=$PROJ"-"${VER//./-}
 MESSAGE="Tagging version "$VER
-INITFILE=$PROJ"/__init__.py"
+INITFILE="hdf5io/__init__.py"
 SETUPFILE="setup.py"
 
 # Set repodir
