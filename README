@@ -1,6 +1,6 @@
 $Id$
-Last modified Thu Feb  5 23:06:14 2009 on violator
-update count: 32
+Last modified Sat Feb 21 00:44:29 2009 on violator
+update count: 35
 
 Hdf5io Python module 
 ====================
@@ -33,6 +33,11 @@ or:
 1c. Names of variables to be saved can also be specified using wildcards '*':
 
  hdf5save("file.h5","v*")   
+
+1d. Appending data to an existing hdf5 file is also possible. To invoke this
+special mode add a + sign at the beginning of the file name:
+
+ hdf5save("+file.h5","var")   
 
 2. hdf5ls
 -----------

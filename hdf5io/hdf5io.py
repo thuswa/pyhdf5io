@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # $Id$
-# Last modified Sat Feb 21 00:23:15 2009 on violator
-# update count: 470
+# Last modified Sat Feb 21 00:45:02 2009 on violator
+# update count: 471
 #
 # pyhdf5io - Python module containing hdf5 load and save functions.
 # Copyright (C) 2008  Albert Thuswaldner
@@ -124,7 +124,7 @@ def hdf5save(*args):
      group. It is also possible to specify exactly which variables that should
      be saved either by the complete variable name or by using wildcards '*'.
      Appending data to an existing hdf5 file is possible. To invoke this
-     special mode just add a + sign to the start of the file name.  
+     special mode just add a + sign to the beginning of the file name.  
     """
     # Get dictonary from caller namespace
     dictvar=__magicLocals()
