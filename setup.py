@@ -6,7 +6,7 @@
 from distutils.core import setup
 
 setup(name='pyhdf5io',
-      version='0.6.1',
+      version='0.6.2',
       description='Python module containing high-level hdf5 load and save functions.',
       author='Albert Thuswaldner',
       author_email='thuswa@gmail.com',
