@@ -1,0 +1,264 @@
+2009-02-20 23:39  albert.thuswaldner
+
+	* hdf5io/__init__.py, setup.py: Uped version
+
+2009-02-20 23:38  albert.thuswaldner
+
+	* release: fixed bug in release script
+
+2009-02-20 23:24  albert.thuswaldner
+
+	* hdf5io/hdf5io.py: added append option
+
+2009-02-19 22:37  albert.thuswaldner
+
+	* release: - made the release script more project independent
+
+2009-02-08 22:26  albert.thuswaldner
+
+	* release: updated release script to upload dist archive to
+	  googlecode
+
+2009-02-08 20:59  albert.thuswaldner
+
+	* hdf5io/hdf5io.py: fixed hdf5save crash
+
+2009-02-08 20:54  albert.thuswaldner
+
+	* hdf5io/__init__.py, setup.py: Uped version
+
+2009-02-05 22:08  albert.thuswaldner
+
+	* hdf5io/__init__.py, setup.py: Uped version
+
+2009-02-05 22:06  albert.thuswaldner
+
+	* README: updated readme
+
+2009-02-05 21:50  albert.thuswaldner
+
+	* hdf5io/hdf5io.py: fixed wildcard feature
+
+2009-02-04 12:13  albert.thuswaldner
+
+	* hdf5io/hdf5io.py: fixed function documentation
+
+2009-02-04 12:12  albert.thuswaldner
+
+	* hdf5io/hdf5io.py: updated function documentation
+
+2009-02-03 22:40  albert.thuswaldner
+
+	* hdf5io/hdf5io.py: fixed some of the wildcard issue
+
+2009-02-03 19:52  albert.thuswaldner
+
+	* hdf5io/hdf5io.py: fixed condition in hdf5load
+
+2009-02-02 23:25  albert.thuswaldner
+
+	* hdf5io/hdf5io.py: commited changes to accept wildcards in
+	  variable arg list
+
+2009-01-29 23:34  albert.thuswaldner
+
+	* release: completed release script
+
+2009-01-29 08:47  albert.thuswaldner
+
+	* release: included basic functionallity in release script
+
+2009-01-29 08:29  albert.thuswaldner
+
+	* release: property 'svn:keywords' and 'svn:executable' set on file
+
+2009-01-29 08:29  albert.thuswaldner
+
+	* release: property 'svn:keywords' set on file
+
+2009-01-27 22:16  albert.thuswaldner
+
+	* hdf5io/__init__.py: uped version number
+
+2009-01-27 22:13  albert.thuswaldner
+
+	* setup.py: uped version number
+
+2009-01-27 22:09  albert.thuswaldner
+
+	* hdf5io/hdf5io.py: Fixed load problems when loading from file with
+	  nested groups
+
+2009-01-14 21:33  albert.thuswaldner
+
+	* TODO: updated todo
+
+2009-01-14 21:32  albert.thuswaldner
+
+	* hdf5io/hdf5io.py: updated help text
+
+2009-01-13 23:56  albert.thuswaldner
+
+	* TODO: updated todo
+
+2009-01-13 23:49  albert.thuswaldner
+
+	* TODO: updated todo
+
+2009-01-13 23:40  albert.thuswaldner
+
+	* hdf5io/hdf5io.py: - changed function call of hdf5load and
+	  hdf5save to use *args
+	  - buggfix: included create group functionality in hdf5save
+
+2009-01-10 23:21  albert.thuswaldner
+
+	* TODO: updated todo
+
+2009-01-10 22:58  albert.thuswaldner
+
+	* hdf5io/hdf5io.py: format long line in extractvars
+
+2009-01-09 16:00  albert.thuswaldner
+
+	* TODO: updated todo
+
+2008-11-17 10:35  albert.thuswaldner
+
+	* TODO: updated todo
+
+2008-10-05 21:05  albert.thuswaldner
+
+	* README: added example of loading variables from a specific group
+
+2008-10-01 17:50  albert.thuswaldner
+
+	* MANIFEST.in: dos2unix on MANIFEST.in
+
+2008-10-01 17:40  albert.thuswaldner
+
+	* README: minor fix on README
+
+2008-10-01 17:35  albert.thuswaldner
+
+	* hdf5io/__init__.py, test/hdf5test.py: fixed forgotten rename
+	  hdf5info to hdf5ls
+
+2008-09-27 17:14  albert.thuswaldner
+
+	* README, TODO, test/hdf5test.py: changed name on hdf5info to
+	  hdf5ls to be more inline with other implementations
+
+2008-09-27 17:12  albert.thuswaldner
+
+	* hdf5io/hdf5io.py: changed name on hdf5info to hdf5ls to be more
+	  inline with other implementations
+
+2008-08-20 20:57  albert.thuswaldner
+
+	* hdf5io/__init__.py, setup.py: uped version 0.3
+
+2008-08-20 20:53  albert.thuswaldner
+
+	* TODO: checked done tasks
+
+2008-08-20 20:50  albert.thuswaldner
+
+	* hdf5io/hdf5io.py: - wrapped try block araound file open in info
+	  and load functions
+
+2008-08-19 22:03  albert.thuswaldner
+
+	* hdf5io/hdf5io.py: - expanded help text for functions
+
+2008-08-19 21:43  albert.thuswaldner
+
+	* TODO: added todo task
+
+2008-08-19 08:42  albert.thuswaldner
+
+	* TODO: added todo task
+
+2008-08-19 08:27  albert.thuswaldner
+
+	* PKG-INFO, setup.py: updated package meta data
+
+2008-08-18 20:18  albert.thuswaldner
+
+	* PKG-INFO, hdf5io/__init__.py, setup.py: - uped version to 0.2
+
+2008-08-18 20:11  albert.thuswaldner
+
+	* README, TODO, hdf5io/hdf5io.py, test/hdf5test.py: - added option
+	  to append variables to file
+	  - added option to load speific varables from file
+
+2008-08-18 18:31  albert.thuswaldner
+
+	* hdf5io, setup.py, src: restructured repo
+
+2008-08-18 18:25  albert.thuswaldner
+
+	* INSTALL: editorial changes
+
+2008-08-18 18:25  albert.thuswaldner
+
+	* PKG-INFO, README: editorial changes
+
+2008-08-18 07:31  albert.thuswaldner
+
+	* TODO: - added new task to TODO
+
+2008-08-18 07:14  albert.thuswaldner
+
+	* MANIFEST.in: property 'svn:keywords' set on file
+
+2008-08-18 06:43  albert.thuswaldner
+
+	* setup.py: - fixed setup.py to work on windows
+
+2008-08-17 20:28  albert.thuswaldner
+
+	* src/__init__.py: - fixed init script
+
+2008-08-17 19:54  albert.thuswaldner
+
+	* INSTALL, PKG-INFO, README, setup.py, src/hdf5io.py: - edit on
+	  description text
+
+2008-08-17 19:17  albert.thuswaldner
+
+	* __init__.py, setup.py, src/__init__.py: - fixed install
+
+2008-08-17 18:45  albert.thuswaldner
+
+	* COPYING, PKG-INFO, hdf5io.py, hdf5test.py, setup.py,
+	  src/hdf5io.py, test/hdf5test.py: - restructured repo
+	  - edit on setup.py
+	  - added licence text and PKG-INFO
+
+2008-08-17 18:42  albert.thuswaldner
+
+	* src, test: added src/ and test/ dirs
+
+2008-08-17 15:37  albert.thuswaldner
+
+	* INSTALL, README, TODO, hdf5io.py, hdf5test.py, setup.py: -
+	  updated descrption
+	  - fixed hdf5save
+	  - fixed test script
+
+2008-08-17 15:01  albert.thuswaldner
+
+	* INSTALL, README, TODO, __init__.py, hdf5io.py, hdf5test.py,
+	  setup.py: set keyword properties on files
+
+2008-08-17 14:59  albert.thuswaldner
+
+	* INSTALL, README, TODO, __init__.py, hdf5io.py, hdf5test.py,
+	  setup.py: initial commit
+
+2008-08-17 14:52  
+
+	* .: Initial directory structure.
+
