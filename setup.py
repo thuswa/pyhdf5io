@@ -1,12 +1,14 @@
 #!/usr/bin/env python
 # $Id$
-# Last modified Tue Jan 27 23:11:54 2009 on violator
-# update count: 34
+# Last modified Thu May 21 13:52:41 2009 on violator
+# update count: 36
 
 from distutils.core import setup
 
+from hdf5io import __version__
+
 setup(name='pyhdf5io',
-      version='0.6.2',
+      version=__version__,
       description='Python module containing high-level hdf5 load and save functions.',
       author='Albert Thuswaldner',
       author_email='thuswa@gmail.com',
