@@ -1,10 +1,10 @@
 #!/usr/bin/env python
 # $Id$
-# Last modified Sat Feb 21 00:45:02 2009 on violator
-# update count: 471
+# Last modified Thu May 21 21:06:11 2009 on violator
+# update count: 491
 #
 # pyhdf5io - Python module containing hdf5 load and save functions.
-# Copyright (C) 2008  Albert Thuswaldner
+# Copyright (C) 2008-2009  Albert Thuswaldner
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -30,14 +30,27 @@ import tables
 
 ###############################################################################
 
-def hdf5ls(filename):
+def hdf5ls(*args):
     """
     Displays the contents of a hdf5 file.
 
     Syntax:
+     hdf5ls()
      hdf5ls('filename')
+
+     Calling this function with no arguments assumes the default
+     file name \"hdf5io.h5\"
     """
+    # Check input arguments
+    if len(args) == 0:
+        filename = "hdf5io.h5"
+    elif len(args) == 1:
+        filename = args[0]
+    else:
+        raise ValueError, "Too many arguments"        
+    
     # Try to open and read from file 
+    print "Listing content of:", filename
     try:
         f=tables.openFile(filename,'r')
 
@@ -57,6 +70,7 @@ def hdf5load(*args):
     Loads variables from hdf5 file.
     
     Syntax:
+     hdf5load()
      hdf5load('filename')
      hdf5load('filename', 'v*')
      hdf5load('filename', '/group')
@@ -68,11 +82,13 @@ def hdf5load(*args):
     Description:
      hdf5load loads variables from a hdf5 file to the namespace from where
      the function is called. The syntax is flexible which means that the
-     function can be called in several different ways (see above). If only
-     the file name is given, all variables are loaded. In addition, if
-     a group name is supplied, all variables from that group is loaded.
-     It is also possible to specify exactly which variables that should
-     be loaded either by the complete variable name or by using wildcards '*'.
+     function can be called in several different ways (see above). When this
+     function is called with no arguments it will default to try loading all
+     variables from a file called \"hdf5io.h5\". The user has also the
+     option to specify a file name. In addition, if a group name is supplied,
+     all variables from that group is loaded. It is also possible to specify
+     exactly which variables that should be loaded either by the complete
+     variable name or by using wildcards '*'.
     """
 
     # Get dictonary from caller namespace
@@ -106,6 +122,7 @@ def hdf5save(*args):
     Saves variables to a hdf5 file.
     
     Syntax:
+     hdf5save()
      hdf5save('filename')
      hdf5save('filename', 'v*')
      hdf5save('filename', '/group')
@@ -118,13 +135,15 @@ def hdf5save(*args):
     Description:
      hdf5save saves variables from the current namespace to a hdf5 file.
      The syntax is flexible which means that the function can be called
-     in several different ways (see above). If only the file name is given,
-     all variables are saved to the root group of the hdf5 file. In addition,
-     if a group name is supplied, all variables can be saved to a specific
-     group. It is also possible to specify exactly which variables that should
-     be saved either by the complete variable name or by using wildcards '*'.
-     Appending data to an existing hdf5 file is possible. To invoke this
-     special mode just add a + sign to the beginning of the file name.  
+     in several different ways (see above). When this function is called with
+     no arguments it will default to saving all local variables to the root
+     group of a file called \"hdf5io.h5\". The user has also the option to
+     specify the file name. In addition, if a group name is supplied, all
+     variables can be saved to a specific group. It is also possible to
+     specify exactly which variables that should be saved either by the
+     complete variable name or by using wildcards '*'. Appending data
+     to an existing hdf5 file is possible. To invoke this special mode
+     just add a + sign to the beginning of the file name.  
     """
     # Get dictonary from caller namespace
     dictvar=__magicLocals()
@@ -209,7 +228,7 @@ def __extractargs(*args):
             else:
                 raise ValueError, "variable input must be of type string"
     else:
-        raise ValueError, "Too few arguments"
+        filename = "hdf5io.h5"
 
     # Compile regulare expression from match list
     if varmatch:
