@@ -1,6 +1,6 @@
 $Id$
-Last modified Sat Feb 21 00:44:29 2009 on violator
-update count: 35
+Last modified Thu May 21 20:05:39 2009 on violator
+update count: 38
 
 Hdf5io Python module 
 ====================
@@ -16,12 +16,19 @@ Usage examples
 
 1. hdf5save
 -----------
-1a. To save all user create variables in current scope to a hdf5-file called 
-"file.h5" type:
+1a. The most simple call to hdf5save is to type:
+
+ hdf5save()  
+
+This will save all the user created variables in the current scope to a 
+hdf5-file called "hdf5io.h5".
+
+1b. To define a file name, for instance called "file.h5" to save the 
+variables to:
 
  hdf5save("file.h5")  
 
-1b. To save specific variables in current scope to a hdf5-file called 
+1c. To save specific variables in current scope to a hdf5-file called 
 "file.h5" type:
 
  hdf5save("file.h5","var varstring")    
@@ -30,11 +37,11 @@ or:
 
  hdf5save("file.h5","var1","var2")   
 
-1c. Names of variables to be saved can also be specified using wildcards '*':
+1d. Names of variables to be saved can also be specified using wildcards '*':
 
  hdf5save("file.h5","v*")   
 
-1d. Appending data to an existing hdf5 file is also possible. To invoke this
+1e. Appending data to an existing hdf5 file is also possible. To invoke this
 special mode add a + sign at the beginning of the file name:
 
  hdf5save("+file.h5","var")   
@@ -47,11 +54,18 @@ To show the contents of a hdf5 file called "file.h5" type:
 
 3. hdf5load
 -----------
-3a. To load the variables from a hdf5 file called "file.h5" type:
+3a. As with the save function above, the most simple way to call hdf5load is
+to type:
+
+ hdf5load()
+
+This will load all variables from a file called "hdf5io.h5".
+
+3b. To load the variables from a hdf5 file called "file.h5" type:
 
  hdf5load("file.h5")
  
-3b. To load a specific variable from a hdf5 file called "file.h5" type:
+3c. To load a specific variable from a hdf5 file called "file.h5" type:
 
  hdf5load("file.h5","var2")
 
@@ -59,11 +73,11 @@ or:
 
  hdf5load("file.h5","var1","var2")   
 
-3c. Names of variables to be loaded can also be specified using wildcards '*':
+3d. Names of variables to be loaded can also be specified using wildcards '*':
 
  hdf5load("file.h5","v*")   
 
-3d. To load variables in a specific group  from a hdf5 file called "file.h5" 
+3e. To load variables in a specific group  from a hdf5 file called "file.h5" 
 type:
 
  hdf5load("file.h5",None,"/group1")
