@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # $Id$
-# Last modified Thu May 21 21:06:11 2009 on violator
-# update count: 491
+# Last modified Mon May 25 14:14:18 2009 on violator
+# update count: 496
 #
 # pyhdf5io - Python module containing hdf5 load and save functions.
 # Copyright (C) 2008-2009  Albert Thuswaldner
@@ -180,17 +180,9 @@ def hdf5save(*args):
 ###############################################################################
 # Helper functions
 
-# Not used
-def __magicGlobals(level=1):
-    r"""Return the globals of the *caller*'s caller (default), or `level`
-    callers up."""
-    return inspect.getouterframes(inspect.currentframe())[1+level][0].f_globals
-
-# used
 def __magicLocals(level=1):
-    r"""Return the locals of the *caller*'s caller (default) , or `level`
-    callers up.
-    """
+    """ Return the locals of the caller's caller (default),
+        or or set caller level. """
     return inspect.getouterframes(inspect.currentframe())[1+level][0].f_locals
 
 def __extractargs(*args):
@@ -230,7 +222,7 @@ def __extractargs(*args):
     else:
         filename = "hdf5io.h5"
 
-    # Compile regulare expression from match list
+    # Compile regular expression from match list
     if varmatch:
         varmatch='('+varmatch.replace("*",".*")+')'
 
@@ -239,7 +231,7 @@ def __extractargs(*args):
     return (filename, groupname, varnames, mode)
         
 def __checkvars(key, value):
-    """check variables from global dictionary"""
+    """ Check variables from global dictionary. """
     blacklist=['help','In','Out']
     if key[0] == "_" \
            or inspect.isclass(value) \
