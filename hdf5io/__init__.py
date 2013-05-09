@@ -6,7 +6,7 @@
 This file initialises the hdfio package.
 """
 
-from hdf5io import hdf5save, hdf5load, hdf5ls
+from .hdf5io import hdf5save, hdf5load, hdf5ls
 
 # Identification of version.
 

@@ -18,7 +18,7 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
+from __future__ import print_function
 """
 A set of I/O functions for the hdf5 file format.
 
@@ -47,21 +47,21 @@ def hdf5ls(*args):
     elif len(args) == 1:
         filename = args[0]
     else:
-        raise ValueError, "Too many arguments"        
+        raise ValueError("Too many arguments")        
     
     # Try to open and read from file 
-    print "Listing content of:", filename
+    print("Listing content of:", filename)
     try:
         f=tables.openFile(filename,'r')
 
         try:
             for group in f.walkGroups():
                 for node in f.listNodes(group):
-                    print node
+                    print(node)
         finally:
           f.close()
     except IOError:
-        print 'Cannot read:', filename
+        print('Cannot read:', filename)
 
 ###############################################################################
 
@@ -113,7 +113,7 @@ def hdf5load(*args):
         finally:
            f.close()
     except IOError:
-        print 'Cannot read:', filename
+        print('Cannot read:', filename)
 
 ###############################################################################
 
@@ -170,7 +170,7 @@ def hdf5save(*args):
                 if group:
                     g=f.createGroup(g,group)
 
-    for key,value in dictvar.iteritems():
+    for key,value in dictvar.items():
         if varnames.match(key) and __checkvars(key, value):
             f.createArray(g,key,value)
 
@@ -218,7 +218,7 @@ def __extractargs(*args):
                             varmatch = varmatch+'|'+var
                             first=0
             else:
-                raise ValueError, "variable input must be of type string"
+                raise ValueError("variable input must be of type string")
     else:
         filename = "hdf5io.h5"
 
