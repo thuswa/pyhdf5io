@@ -1,7 +1,6 @@
 #!/usr/bin/env python
-# $Id$
-# Last modified Thu May 21 13:52:41 2009 on violator
-# update count: 36
+# Last modified Thu May  9 22:29:02 2013 on havoc
+# update count: 37
 
 from distutils.core import setup
 

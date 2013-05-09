@@ -1,6 +1,5 @@
-# $Id$
-# Last modified Tue Jan 27 23:16:05 2009 on violator
-# update count: 10
+# Last modified Thu May  9 22:30:05 2013 on havoc
+# update count: 11
 
 """
 This file initialises the hdfio package.

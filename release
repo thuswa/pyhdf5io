@@ -1,7 +1,6 @@
 #!/bin/bash
-# $Id$
-# Last modified Tue Jun  2 22:15:50 2009 on violator
-# Update count: 107
+# Last modified Thu May  9 22:26:57 2013 on havoc
+# Update count: 108
 #
 # release - release script for python projects
 # Copyright (C) 2008-2009  Albert Thuswaldner

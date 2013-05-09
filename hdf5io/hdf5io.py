@@ -1,7 +1,6 @@
 #!/usr/bin/env python
-# $Id$
-# Last modified Mon May 25 14:14:18 2009 on violator
-# update count: 496
+# Last modified Thu May  9 22:29:43 2013 on havoc
+# update count: 497
 #
 # pyhdf5io - Python module containing hdf5 load and save functions.
 # Copyright (C) 2008-2009  Albert Thuswaldner
