@@ -1,6 +1,6 @@
 #!/bin/bash
-# Last modified Thu May  9 22:26:57 2013 on havoc
-# Update count: 108
+# Last modified Sat May 11 22:32:57 2013 on havoc
+# Update count: 129
 #
 # release - release script for python projects
 # Copyright (C) 2008-2009  Albert Thuswaldner
@@ -8,7 +8,7 @@
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
+# any later version.
 #
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -32,20 +32,14 @@ VER=$1
 
 # Get repository info
 PROJ="pyhdf5io"
-SRVREPO="https://"$PROJ$".googlecode.com/svn"
-SUBDIR="trunk/"
+REPO="https://code.googlecode.com/p/"$PROJ$"/"
 TAGNAME=$PROJ"-"${VER//./-}
 MESSAGE="Tagging version "$VER
 INITFILE="hdf5io/__init__.py"
 
-# Set repodir
-REPODIR=$SRVREPO"/"$SUBDIR
-TAGDIR=$SRVREPO"/tags/"$TAGNAME
-
 # Ask user to confirm
 echo Tagging....
-echo $REPODIR to: 
-echo $TAGDIR
+echo $TAGNAME 
 
 while true; do
   read -p "Confirm (y/n)? " 
@@ -56,15 +50,17 @@ while true; do
 	      $INITFILE > temp 
 	  mv -f temp $INITFILE
 
-	  svn ci -m "Uped version" $INITFILE 
+	  git ci -m "Uped version" $INITFILE 
 	  
 	  # Tagging version
-	  svn copy $REPODIR $TAGDIR -m "$MESSAGE"
+	  git tag -a $TAGNAME -m "$MESSAGE"
+
+	  git push $REPO
 
 	  # bulid source distribution and register 
-	  python ./setup.py sdist
-	  python ./setup.py register
-	  python ./googlecode_upload.py -s "version "$VER -p $PROJ \
+	  python3 ./setup.py sdist
+	  python3 ./setup.py register
+	  python3 ./googlecode_upload_py3k.py -s "version "$VER -p $PROJ \
 	      dist/$PROJ-$VER.tar.gz
  
 	  break;
