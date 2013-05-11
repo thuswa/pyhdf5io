@@ -1,6 +1,6 @@
 #!/usr/bin/env python
-# Last modified Thu May  9 22:29:43 2013 on havoc
-# update count: 497
+# Last modified Sat May 11 13:15:43 2013 on havoc
+# update count: 507
 #
 # pyhdf5io - Python module containing hdf5 load and save functions.
 # Copyright (C) 2008-2009  Albert Thuswaldner
@@ -17,12 +17,14 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
-from __future__ import print_function
+
 """
 A set of I/O functions for the hdf5 file format.
 
 Based on pyTables to be able to save and load data to/from hdf5 files.
 """
+from __future__ import print_function
+
 import inspect
 import re
 import tables
@@ -230,12 +232,14 @@ def __extractargs(*args):
     return (filename, groupname, varnames, mode)
         
 def __checkvars(key, value):
-    """ Check variables from global dictionary. """
+    """ Check variables against blacklist """
     blacklist=['help','In','Out']
     if key[0] == "_" \
            or inspect.isclass(value) \
            or inspect.ismodule(value) \
            or inspect.isfunction(value) \
+           or inspect.ismethod(value) \
+           or inspect.isbuiltin(value) \
            or key in blacklist:
         return 0
     else:
