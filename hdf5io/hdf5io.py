@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # encoding: utf-8
-# Last modified Sat May 11 13:18:44 2013 on havoc
-# update count: 509
+# Last modified Wed May 15 00:30:31 2013 on havoc
+# update count: 554
 #
 # pyhdf5io - Python module containing hdf5 load and save functions.
 # Copyright (C) 2008-2009  Albert Thuswaldner
@@ -9,7 +9,7 @@
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
+# any later version.
 #
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -29,6 +29,8 @@ from __future__ import print_function
 import inspect
 import re
 import tables
+
+debug = 0 
 
 ###############################################################################
 
@@ -111,8 +113,10 @@ def hdf5load(*args):
                 # Walk through only the leaves (don't list the groups)
                 for leaf in group._f_walkNodes('Leaf'):
                     if not varnames or varnames.match(leaf.name): 
-                        dictvar[leaf.name] = leaf.read()
+                        dictvar[leaf.name] = __stringdecoder(leaf.read())
+
         finally:
+           return dictvar
            f.close()
     except IOError:
         print('Cannot read:', filename)
@@ -174,8 +178,9 @@ def hdf5save(*args):
 
     for key,value in dictvar.items():
         if varnames.match(key) and __checkvars(key, value):
-            f.createArray(g,key,value)
-
+            if debug:
+                print(key,' : ',value)
+            f.createArray(g,key,__stringencoder(value))
     # Close file
     f.close()
 
@@ -207,7 +212,7 @@ def __extractargs(*args):
             
         # loop the rest of the args list and extract group/variable names
         for arg in arglist:
-            if type(arg) is str:
+            if isinstance(arg, str):
                 varlist=arg.split()
                 for var in varlist:
                     # Check if variable name list contains a group name
@@ -245,4 +250,32 @@ def __checkvars(key, value):
         return 0
     else:
         return 1
+
+def __stringencoder(var):
+    """ pyTables can not handle unicode strings. """
+    if isinstance(var, str):
+        # simple string encode to binary
+        return var.encode('utf-8')
+    elif isinstance(var, tuple):
+        # covert to list handle it as such and return tuple
+        return tuple(__stringencoder(list(var)))
+    elif isinstance(var, list):
+        # search for string in list and encode to binary string
+        return [ x.encode('utf-8') if isinstance(x, str) else x for x in var]
+    else:
+        return var
+
+def __stringdecoder(var):
+    """ pyTables can not handle unicode strings. """
+    if isinstance(var, bytes):
+        # simple string encode to binary
+        return var.decode('utf-8')
+    elif isinstance(var, tuple):
+        # covert to list handle it as such and return tuple
+        return tuple(__stringdecoder(list(var)))
+    elif isinstance(var, list):
+        # search for string in list and encode to binary string
+        return [ x.decode('utf-8') if isinstance(x, bytes) else x for x in var]
+    else:
+        return var
 
