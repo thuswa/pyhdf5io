@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # encoding: utf-8
-# Last modified Wed May 15 00:30:31 2013 on havoc
-# update count: 554
+# Last modified Wed May 15 00:57:37 2013 on havoc
+# update count: 555
 #
 # pyhdf5io - Python module containing hdf5 load and save functions.
 # Copyright (C) 2008-2009  Albert Thuswaldner
@@ -116,7 +116,6 @@ def hdf5load(*args):
                         dictvar[leaf.name] = __stringdecoder(leaf.read())
 
         finally:
-           return dictvar
            f.close()
     except IOError:
         print('Cannot read:', filename)
