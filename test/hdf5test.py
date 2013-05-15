@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # encoding: utf-8
-# Last modified Wed May 15 01:03:06 2013 on havoc
-# update count: 93
+# Last modified Wed May 15 08:13:26 2013 on havoc
+# update count: 96
 
 from hdf5io import *
 from numpy import array 
@@ -36,6 +36,7 @@ def testappend():
 def testaddgroup():
     """ Test to add a group """
     var2=67.3
+    var3="group test"
     hdf5save("+test.h5",'var2',"/test")
 
 def testloadtypes():
@@ -43,7 +44,10 @@ def testloadtypes():
     hdf5load("test.h5")
     return locals()
 
-def main():
+def testloadgroup():
+    """ Test loading supported variable types """
+    
+def hdf5test():
     """ Main test function """
     savedict = testsavetypes()
     showfile()
@@ -60,4 +64,4 @@ def main():
     showfile()
 
 if __name__ == '__main__':
-    main()
+    hdf5test()
