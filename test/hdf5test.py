@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # encoding: utf-8
-# Last modified Wed May 15 08:28:21 2013 on havoc
-# update count: 97
+# Last modified Wed May 15 08:31:21 2013 on havoc
+# update count: 99
 #
 # pyhdf5io - Python module containing hdf5 load and save functions.
 # Copyright (C) 2008-2013  Albert Thuswaldner
@@ -61,8 +61,9 @@ def testloadtypes():
     return locals()
 
 def testloadgroup():
-    """ Test loading supported variable types """
-    
+    """ Test loading variables in a group"""
+    hdf5load("test.h5","/test")
+
 def hdf5test():
     """ Main test function """
     savedict = testsavetypes()
