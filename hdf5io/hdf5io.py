@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # encoding: utf-8
-# Last modified Wed May 15 08:26:43 2013 on havoc
-# update count: 556
+# Last modified Wed May 15 20:05:01 2013 on havoc
+# update count: 570
 #
 # pyhdf5io - Python module containing hdf5 load and save functions.
 # Copyright (C) 2008-2013  Albert Thuswaldner
@@ -113,8 +113,10 @@ def hdf5load(*args):
                 # Walk through only the leaves (don't list the groups)
                 for leaf in group._f_walkNodes('Leaf'):
                     if not varnames or varnames.match(leaf.name): 
+                        if debug:
+                            print(leaf.name,' : ',leaf.read())
+                            print(leaf.name,' : ',__stringdecoder(leaf.read()))
                         dictvar[leaf.name] = __stringdecoder(leaf.read())
-
         finally:
            f.close()
     except IOError:
@@ -179,6 +181,7 @@ def hdf5save(*args):
         if varnames.match(key) and __checkvars(key, value):
             if debug:
                 print(key,' : ',value)
+                print(key,' : ',__stringencoder(value))
             f.createArray(g,key,__stringencoder(value))
     # Close file
     f.close()
@@ -202,6 +205,8 @@ def __extractargs(*args):
     if len(args) >= 1:
         # transform args tuple to list
         arglist=list(args)
+        if debug:
+            print(arglist)
         # Pop the presumed filename from the args list 
         filename=arglist.pop(0)
         # Check if append (only applicable for hdf5save) 
@@ -220,9 +225,9 @@ def __extractargs(*args):
                     else:
                         if first:  
                             varmatch=var
+                            first=0
                         else:
                             varmatch = varmatch+'|'+var
-                            first=0
             else:
                 raise ValueError("variable input must be of type string")
     else:
@@ -232,8 +237,11 @@ def __extractargs(*args):
     if varmatch:
         varmatch='('+varmatch.replace("*",".*")+')'
 
-    varnames=re.compile(varmatch)
 
+    varnames=re.compile(varmatch)
+    
+    if debug:
+        print(filename, groupname, varmatch, mode)
     return (filename, groupname, varnames, mode)
         
 def __checkvars(key, value):
