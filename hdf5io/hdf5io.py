@@ -1,10 +1,10 @@
 #!/usr/bin/env python
 # encoding: utf-8
-# Last modified Wed May 15 00:57:37 2013 on havoc
-# update count: 555
+# Last modified Wed May 15 08:26:43 2013 on havoc
+# update count: 556
 #
 # pyhdf5io - Python module containing hdf5 load and save functions.
-# Copyright (C) 2008-2009  Albert Thuswaldner
+# Copyright (C) 2008-2013  Albert Thuswaldner
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
